@@ -137,3 +137,58 @@ resource  "azurerm_linux_web_app" "appservice-notification" {
         }
     }
 }
+
+
+# Database transaction
+
+resource  "azurerm_mssql_server" "sql_server_tranx" {
+    name = "sqlserver-tranx"    
+    resource_group_name = azurerm_resource_group.rg.name
+    location = "northeurope"
+    version = "12.0"
+    administrator_login = "adminuser"
+    administrator_login_password = "admin.12345"
+}
+
+resource  "azurerm_mssql_database" "sql_database_tranx" {
+    name = "sqlserver-transaction-northeurope" 
+    server_id =  azurerm_mssql_server.sql_server_tranx.id
+    sku_name = "Basic"    
+}
+
+# Database balance
+
+resource  "azurerm_mssql_server" "sql_server_balance" {
+    name = "sqlserver-balance"    
+    resource_group_name = azurerm_resource_group.rg.name
+    location = "northeurope"
+    version = "12.0"
+    administrator_login = "adminuser"
+    administrator_login_password = "admin.12345"
+}
+
+resource  "azurerm_mssql_database" "sql_database_balance" {
+    name = "sqlserver-balance-northeurope" 
+    server_id =  azurerm_mssql_server.sql_server_balance.id
+    sku_name = "Basic"    
+}
+
+# Database transfer
+
+resource  "azurerm_mssql_server" "sql_server_transfer" {
+    name = "sqlserver-transfer"    
+    resource_group_name = azurerm_resource_group.rg.name
+    location = "northeurope"
+    version = "12.0"
+    administrator_login = "adminuser"
+    administrator_login_password = "admin.12345"
+}
+
+resource  "azurerm_mssql_database" "sql_database_transfer" {
+    name = "sqlserver-transfer-northeurope" 
+    server_id =  azurerm_mssql_server.sql_server_transfer.id
+    sku_name = "Basic"    
+}
+
+
+
